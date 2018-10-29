@@ -23,6 +23,6 @@ def compare(list1, list2):
         final.append(val)
     return final
 
-learningTest.main(red, inputs, expected, compare, 200)
+learningTest.main(red, inputs, expected, compare, 25)
 
 f.close()
