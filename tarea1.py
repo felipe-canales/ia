@@ -1,14 +1,17 @@
+import random
 import learningTest
-import fileinput
 from NN.NeuralNetwork import NeuralNetwork
 
-inputs = []
-expected = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for _ in range(2000)]
+#inputs = []
+data = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for _ in range(2000)]
 f = open("data.txt")
 for i in range(2000):
     line = f.readline().split("  ")
-    inputs.append(list(map(lambda x: int(x) / 6, line))) # valores son enteros de 0 a 6
-    expected[i][int(i / 200)] = 1
+    #inputs.append(list(map(lambda x: int(x) / 6, line))) # valores son enteros de 0 a 6
+    data[i][int(i / 200)] = 1
+    data[i].append(list(map(lambda x: int(x) / 6, line)))
+random.shuffle(data)
+inputs = [data[i].pop() for i in range(2000)]
 
 red = NeuralNetwork([70, 50, 30, 10], 240)
 
@@ -23,6 +26,6 @@ def compare(list1, list2):
         final.append(val)
     return final
 
-learningTest.main(red, inputs, expected, compare, 25)
+learningTest.main(red, inputs, data, compare, 25)
 
 f.close()
