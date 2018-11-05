@@ -1,6 +1,15 @@
 import random
+import sys
 import learningTest
 from NN.NeuralNetwork import NeuralNetwork
+
+layers = [[70, 10], \
+          [70, 30 ,10], \
+          [70, 50, 30, 10]]
+if len(sys.argv) > 1:
+    setting = layers[int(sys.argv[1]) - 1]
+else:
+    setting = layers.pop()
 
 #inputs = []
 data = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for _ in range(2000)]
