@@ -6,7 +6,7 @@ from NN.Sigmoid import Sigmoid as Neuron
 
 
 def main(trainer, inputs, expected, func,\
-         epochs = 50, slow = False):
+         epochs = 50, slow = False, lr = 0.5):
     p = trainer
     n = len(inputs)
     
@@ -16,7 +16,7 @@ def main(trainer, inputs, expected, func,\
     for i in range(epochs):
         print("Currently on epoch", i)
         results = []
-        results = [p.train(inputs[j], expected[j]) for j in range(n)]
+        results = [p.train(inputs[j], expected[j], lr) for j in range(n)]
         advancement.append(sum(func(results, expected)) / len(results))
         error.append(trainer.getError())
 

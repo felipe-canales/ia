@@ -6,10 +6,13 @@ from NN.NeuralNetwork import NeuralNetwork
 layers = [[70, 10], \
           [70, 30 ,10], \
           [70, 50, 30, 10]]
+
+setting = layers[0]
+lrate = 0.5
 if len(sys.argv) > 1:
     setting = layers[int(sys.argv[1]) - 1]
-else:
-    setting = layers[0]
+if len(sys.argv) > 2:
+    lrate = float(sys.argv[2])
 
 data = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for _ in range(2000)]
 f = open("data.txt")
@@ -34,6 +37,6 @@ def compare(list1, list2):
         final.append(val)
     return final
 
-learningTest.main(red, inputs, data, compare, 15)
+learningTest.main(red, inputs, data, compare, epochs=15, lr=lrate)
 
 f.close()
