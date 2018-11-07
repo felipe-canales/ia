@@ -23,15 +23,18 @@ class NeuronLayer:
             return self.outputs
         return self.next.feed(self.outputs)
         
-    def propagate(self, expected = None):        
+    def propagate(self, expected = None):
+        errorTotal = 0      
         for i in range(len(self.neurons)):
             if self.next == None:
                 error = expected[i] - self.neurons[i].getOutput()
+                errorTotal += error
             else:
                 error = self.next.getError(i)
             self.neurons[i].adjustDelta(error)
         if self.prev != None:
             self.prev.propagate()
+        return errorTotal**2
 
     def getError(self, i):
         suma = 0

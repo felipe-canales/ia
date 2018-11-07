@@ -15,6 +15,7 @@ class NeuralNetwork:
             last = layers.pop()
             lastLayer = currentLayer
         self.firstLayer = lastLayer
+        self.error = 0
 
     def setFirstLayer(self, layer):
         self.firstLayer = layer
@@ -27,6 +28,11 @@ class NeuralNetwork:
 
     def train(self, inputs, expected, learningRate = 0.5):
         result = self.feed(inputs)
-        self.outputLayer.propagate(expected)
+        self.error += self.outputLayer.propagate(expected)
         self.firstLayer.learn(inputs, learningRate)
         return result
+
+    def getError(self):
+        e = self.error
+        self.error = 0
+        return e
