@@ -11,20 +11,28 @@ class GeneticAlgorithm:
         self.solution = solution
         self.progress = []
 
-    def solve(self, fitness, objective = None, iterations = 100, maximize = True, mutation=0):
+    def solve(self, fitness, objective = None, iterations = 100, maximize = True, mutation=0, verbose=True):
         f = []
         i = 0
         mf = False
-        while(mf != objective and i < iterations):
+        while True:
             f = self.checkFitness(fitness)
-            mf = max(f)
+            if maximize:
+                mf = max(f)
+            else:
+                mf = min(f)
             mejor = f.index(mf)
-            print("Mejor de la generacion", i, ":", self.population[mejor], "fitness:", mf)
+            if verbose:
+                print("Mejor de la generacion", i, ":", self.population[mejor],\
+                      "fitness:", mf)
             self.progress.append(mf)
+            if i >= iterations - 1 or mf == objective:
+                break
             self.select(f, maximize)
             self.crossover(mutation)
             random.shuffle(self.population)
             i += 1
+        self.respuesta = self.population[mejor]
     
     def checkFitness(self, foo):
         res = []
@@ -71,3 +79,6 @@ class GeneticAlgorithm:
 
     def getProgress(self):
         return self.progress
+
+    def getRespuesta(self):
+        return self.respuesta
