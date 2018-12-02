@@ -1,5 +1,8 @@
 from GeneticAlgorithm import GeneticAlgorithm
+
 import sys, random
+import numpy as np
+import matplotlib.pyplot as plt
 
 def main():
     # Parametros especificos
@@ -76,6 +79,11 @@ def main():
 
     print(" Respuesta alcanzada:\n" + rf, "\nfitness:", fitnessfunction(r, None),\
           "\n Numero de generaciones:", len(p))
+
+    plt.plot(np.array(range(len(p))), np.array(p))
+    plt.xlabel("Generaciones")
+    plt.ylabel("Mejor fitness")
+    plt.show()
 
 
 main()
