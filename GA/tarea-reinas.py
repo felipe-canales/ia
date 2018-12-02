@@ -30,13 +30,12 @@ def fitnessfunction(conf, void):
                 tieneError = True
                 continue
             # diagonales \
-            if (c1[0] - c1[1]) * (c2[0] - c2[1]) >= 0 \
-                and conf[r1] % (n+1) == conf[r2] % (n+1):
+            if (c1[0] - c1[1]) == (c2[0] - c2[1]):
                 errores += 1
                 tieneError = True
                 continue
             # diagonales /
-            if c1[0] + c1[1] == n - 1 and c2[0] + c2[1] == n - 1:
+            if c1[0] + c1[1] ==  c2[0] + c2[1]:
                 errores += 1 # ambos en la diagonal principal
                 tieneError = True
                 continue
@@ -87,8 +86,6 @@ def main():
 
     print(" Respuesta alcanzada:\n" + rf, "\nfitness:", fitnessfunction(r, None),\
           "\n Numero de generaciones:", len(p))
-
-    print(r)
 
     plt.plot(np.array(range(len(p))), np.array(p))
     plt.xlabel("Generaciones")
